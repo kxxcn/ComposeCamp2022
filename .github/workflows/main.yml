@@ -1,4 +1,5 @@
 name: Update Version Name
+run-name: Run script for version configurations by ${{ github.actor }}👮‍♂️
 on:
   push:
     branches:
