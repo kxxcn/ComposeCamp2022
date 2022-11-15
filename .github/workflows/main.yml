@@ -17,5 +17,7 @@ jobs:
       - name: Check output
         run: echo ${{ steps.vars.outputs.short_ref }}
 
-      - name: Substring output
-        run: echo ${{ steps.vars.outputs.short_ref:8 }}
+      - name: Test
+        run: |
+          TAG=${{ steps.vars.outputs.short_ref }}
+          echo "VERSION=${TAG#release}" >> $GITHUB_ENV
