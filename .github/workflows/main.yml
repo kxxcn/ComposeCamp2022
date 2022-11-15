@@ -20,12 +20,18 @@ jobs:
       - name: Check output
         run: echo ${{ steps.vars.outputs.ref }}
           
-      - name: Update gradle version for Android
-        uses: damienaicheh/update-android-version-gradle-action@v1.0.0
+#       - name: Update gradle version for Android
+#         uses: damienaicheh/update-android-version-gradle-action@v1.0.0
+#         with:
+#           build-gradle-path: './pathway1/BasicsCodelab/app/build.gradle'
+#           version-name: '1.0.13'
+#           print-file: false
+
+      - name: Update gradle version
+        uses: chkfung/android-version-actions@v1.1
         with:
-          build-gradle-path: './pathway1/BasicsCodelab/app/build.gradle'
-          version-name: '1.0.13'
-          print-file: false
+          gradlePath: pathway1/BasicsCodelab/app/build.gradle
+          versionName: 1.0.13
           
       - name: Commit & Push
         uses: Andro999b/push@v1.3
