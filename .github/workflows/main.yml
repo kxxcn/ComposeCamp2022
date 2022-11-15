@@ -25,5 +25,13 @@ jobs:
         with:
           build-gradle-path: './pathway1/BasicsCodelab/app/build.gradle'
           version-code: 3
-          version-name: '1.0.11'
+          version-name: '1.0.12'
           print-file: false
+          
+      - name: Commit & Push
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: ${{ steps.vars.outputs.ref }}
+          force: true
+          message: 'Overwritten by Github Actions - ${date}'
