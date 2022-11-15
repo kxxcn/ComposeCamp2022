@@ -9,35 +9,30 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set output
-        id: vars
+      - name: Set branch
+        id: branch
         run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
         
-      - name: Check output
-        run: echo ${{ steps.vars.outputs.ref }}
-        
-      - name: Check substring
+      - name: Extract gradle version
         uses: bhowell2/github-substring-action@v1.0.0
-        id: branch
+        id: version
         with:
-          value: ${{ steps.vars.outputs.ref }}
+          value: ${{ steps.branch.outputs.ref }}
           index_of_str: "release/"
-          
-      - name: Check substring
-        run: echo ${{ steps.branch.outputs.substring }}
 
-#       - name: Update gradle version
-#         uses: chkfung/android-version-actions@v1.1
-#         with:
-#           gradlePath: pathway1/BasicsCodelab/app/build.gradle
-#           versionName: 1.0.13
+      - name: Update gradle version
+        uses: chkfung/android-version-actions@v1.1
+        with:
+          gradlePath: pathway1/BasicsCodelab/app/build.gradle
+          versionName: ${{ steps.version.outputs.substring }}
           
-#       - name: Commit & Push
-#         uses: Andro999b/push@v1.3
-#         with:
-#           github_token: ${{ secrets.TOKEN }}
-#           branch: ${{ steps.vars.outputs.ref }}
-#           force: true
-#           message: '1.0.13 버전 변경'
+      - name: Commit build.gradle
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: ${{ steps.branch.outputs.ref }}
+          force: true
+          message: ${{ steps.version.outputs.substring }} 버전 변경
