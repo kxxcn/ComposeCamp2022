@@ -12,15 +12,10 @@ jobs:
 
       - name: Set output
         id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+        run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
         
       - name: Check output
-        run: echo ${{ steps.vars.outputs.short_ref }}
-
-      - name: Test
-        run: |
-          TAG=${{ steps.vars.outputs.short_ref }}
-          echo "VERSION=${TAG#release}" >> $GITHUB_ENV
+        run: echo ${{ steps.vars.outputs.ref }}
           
       - name: Update gradle version for Android
         uses: damienaicheh/update-android-version-gradle-action@v1.0.0
