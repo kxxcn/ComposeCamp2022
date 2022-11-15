@@ -21,3 +21,11 @@ jobs:
         run: |
           TAG=${{ steps.vars.outputs.short_ref }}
           echo "VERSION=${TAG#release}" >> $GITHUB_ENV
+          
+      - name: Update gradle version for Android
+        uses: damienaicheh/update-android-version-gradle-action@v1.0.0
+        with:
+          build-gradle-path: './pathway1/BasicsCodelab/app/build.gradle'
+          version-code: 2
+          version-name: '1.0.8'
+          print-file: true
