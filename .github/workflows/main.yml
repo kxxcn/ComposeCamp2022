@@ -18,12 +18,15 @@ jobs:
       - name: Check output
         run: echo ${{ steps.vars.outputs.ref }}
         
-      - uses: bhowell2/github-substring-action@v1.0.0
+      - name: Check substring
+        uses: bhowell2/github-substring-action@v1.0.0
         id: branch
         with:
           value: ${{ steps.vars.outputs.ref }}
           index_of_str: "release/"
-          run: echo ${{ steps.branch.outputs.substring }}
+          
+      - name: Check substring
+        run: echo ${{ steps.branch.outputs.substring }}
 
 #       - name: Update gradle version
 #         uses: chkfung/android-version-actions@v1.1
