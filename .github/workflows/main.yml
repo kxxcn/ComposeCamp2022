@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'release/**'
+      
+permissions: read-all|write-all
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -22,5 +25,5 @@ jobs:
         with:
           build-gradle-path: './pathway1/BasicsCodelab/app/build.gradle'
           version-code: 3
-          version-name: '1.0.10'
+          version-name: '1.0.11'
           print-file: false
