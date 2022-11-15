@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'release/**'
-      
-permissions: write-all
 
 jobs:
   Explore-GitHub-Actions:
@@ -19,24 +17,24 @@ jobs:
         
       - name: Check output
         run: echo ${{ steps.vars.outputs.ref }}
-          
-#       - name: Update gradle version for Android
-#         uses: damienaicheh/update-android-version-gradle-action@v1.0.0
-#         with:
-#           build-gradle-path: './pathway1/BasicsCodelab/app/build.gradle'
-#           version-name: '1.0.13'
-#           print-file: false
+        
+      - uses: bhowell2/github-substring-action@v1.0.0
+        id: branch
+        with:
+          value: ${{ steps.vars.outputs.ref }}
+          index_of_str: "release/"
+          run: echo ${{ steps.branch.outputs.substring }}
 
-      - name: Update gradle version
-        uses: chkfung/android-version-actions@v1.1
-        with:
-          gradlePath: pathway1/BasicsCodelab/app/build.gradle
-          versionName: 1.0.13
+#       - name: Update gradle version
+#         uses: chkfung/android-version-actions@v1.1
+#         with:
+#           gradlePath: pathway1/BasicsCodelab/app/build.gradle
+#           versionName: 1.0.13
           
-      - name: Commit & Push
-        uses: Andro999b/push@v1.3
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ steps.vars.outputs.ref }}
-          force: true
-          message: '1.0.13 버전 변경'
+#       - name: Commit & Push
+#         uses: Andro999b/push@v1.3
+#         with:
+#           github_token: ${{ secrets.TOKEN }}
+#           branch: ${{ steps.vars.outputs.ref }}
+#           force: true
+#           message: '1.0.13 버전 변경'
