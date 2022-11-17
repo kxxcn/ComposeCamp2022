@@ -2,14 +2,12 @@ name: Update Version Name
 run-name: Run ${{ steps.branch.outputs.ref }} script for version configurations by ${{ github.actor }}👮‍♂️
 on:
   push:
-    types: 
-      - created
     branches:
       - 'release/**'
 
 jobs:
   update-version-name:
-#     if: github.event.created == true
+    if: github.event.created == true
     runs-on: ubuntu-latest
     env: 
       GITHUB_CONTEXT: '${{ toJSON(github) }}'
