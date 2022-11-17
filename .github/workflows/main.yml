@@ -8,12 +8,14 @@ on:
 jobs:
   update-version-name:
     runs-on: ubuntu-latest
+    env: 
+      GITHUB_CONTEXT: '${{ toJSON(github) }}'
     steps:
       - run: echo "$GITHUB_CONTEXT"
-      - run: echo '${{ toJSON(github) }}'
-      - run: echo ${{ github.event }}
-      - run: echo ${{ github.event_name }}
-      - run: echo ${{ github.action }}
+#       - run: echo '${{ toJSON(github) }}'
+#       - run: echo ${{ github.event }}
+#       - run: echo ${{ github.event_name }}
+#       - run: echo ${{ github.action }}
 #       - run: echo "github.event.action:"${{ github.event.action }}
 #       - run: echo "github.event.pull_request.merged:" ${{ github.event.pull_request.merged }}
     
