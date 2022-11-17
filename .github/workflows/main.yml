@@ -12,15 +12,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get branch name
-        id: branch
-        run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
+#       - name: Get branch name
+#         id: branch
+#         run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
         
       - name: Extract gradle version
         uses: bhowell2/github-substring-action@v1.0.0
         id: version
         with:
-          value: ${{ steps.branch.outputs.ref }}
+          value: ${{ github.ref_name }}
           index_of_str: "release/"
 
       - name: Update gradle version
