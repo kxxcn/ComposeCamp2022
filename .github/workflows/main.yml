@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'release/**'
-      - 'hotfix/**'
 
 jobs:
   build:
@@ -38,3 +37,6 @@ jobs:
           branch: gradle/${{ steps.version.outputs.substring }}
           delete-branch: true
           title: ${{ steps.version.outputs.substring }} 버전 변경
+          labels: |
+            release
+            automation
