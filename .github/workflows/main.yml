@@ -10,8 +10,8 @@ jobs:
     if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
-      - run: echo "github:" ${{ github }}
-      - run: echo "github.event:" ${{ github.event }}
+      - run: echo "github:" ${{ toJSON(github) }}
+      - run: echo "github.event:" ${{ toJSON(github.event) }}
       - run: echo "github.event_name:" ${{ github.event_name }}
 #       - run: echo "event type is:" ${{ github.event.action }}
 #       - run: echo "github.event.action:"${{ github.event.action }}
