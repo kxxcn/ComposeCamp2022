@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "$GITHUB_CONTEXT"
-      - run: echo "github:" ${{ github }}
-      - run: echo "github.event:" ${{ github.event }}
-      - run: echo "github.event_name:" ${{ github.event_name }}
-      - run: echo "github.action:" ${{ github.action }}
+      - run: echo ${{ github }}
+      - run: echo ${{ github.event }}
+      - run: echo ${{ github.event_name }}
+      - run: echo ${{ github.action }}
 #       - run: echo "github.event.action:"${{ github.event.action }}
 #       - run: echo "github.event.pull_request.merged:" ${{ github.event.pull_request.merged }}
     
