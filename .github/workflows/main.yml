@@ -9,34 +9,36 @@ jobs:
   update-version-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - run: github.event.action - ${{ github.event.action }}, github.event.pull_request.merged - ${{ github.event.pull_request.merged }}
+    
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Get branch name
-        id: branch
-        run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
+#       - name: Get branch name
+#         id: branch
+#         run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
         
-      - name: Extract gradle version
-        uses: bhowell2/github-substring-action@v1.0.0
-        id: version
-        with:
-          value: ${{ steps.branch.outputs.ref }}
-          index_of_str: "release/"
+#       - name: Extract gradle version
+#         uses: bhowell2/github-substring-action@v1.0.0
+#         id: version
+#         with:
+#           value: ${{ steps.branch.outputs.ref }}
+#           index_of_str: "release/"
 
-      - name: Update gradle version
-        uses: chkfung/android-version-actions@v1.1
-        with:
-          gradlePath: pathway1/BasicsCodelab/app/build.gradle
-          versionName: ${{ steps.version.outputs.substring }}
+#       - name: Update gradle version
+#         uses: chkfung/android-version-actions@v1.1
+#         with:
+#           gradlePath: pathway1/BasicsCodelab/app/build.gradle
+#           versionName: ${{ steps.version.outputs.substring }}
           
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.TOKEN }}
-          commit-message: ${{ steps.version.outputs.substring }} 버전 변경
-          branch: gradle/${{ steps.version.outputs.substring }}
-          delete-branch: true
-          title: ${{ steps.version.outputs.substring }} 버전 변경
-          labels: |
-            release
-            automation
+#       - name: Create pull request
+#         uses: peter-evans/create-pull-request@v4
+#         with:
+#           token: ${{ secrets.TOKEN }}
+#           commit-message: ${{ steps.version.outputs.substring }} 버전 변경
+#           branch: gradle/${{ steps.version.outputs.substring }}
+#           delete-branch: true
+#           title: ${{ steps.version.outputs.substring }} 버전 변경
+#           labels: |
+#             release
+#             automation
