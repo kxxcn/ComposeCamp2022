@@ -12,7 +12,7 @@ fun WellnessTasksList(
     onCloseTask: (WellnessTask) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
+    LazyColumn(                   
         modifier = modifier
     ) {
         items(
