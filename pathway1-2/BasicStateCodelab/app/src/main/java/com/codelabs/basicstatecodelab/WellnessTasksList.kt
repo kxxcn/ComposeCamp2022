@@ -13,7 +13,7 @@ fun WellnessTasksList(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier
+        modifier = modifier              
     ) {
         items(
             items = list,
