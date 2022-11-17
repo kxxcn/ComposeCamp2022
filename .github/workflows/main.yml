@@ -9,7 +9,9 @@ jobs:
   update-version-name:
     runs-on: ubuntu-latest
     steps:
-      - run: github.event.action - ${{ github.event.action }}, github.event.pull_request.merged - ${{ github.event.pull_request.merged }}
+      - run: |
+          echo github.event.action - ${{ github.event.action }},
+          echo github.event.pull_request.merged - ${{ github.event.pull_request.merged }}
     
 #       - name: Checkout repository
 #         uses: actions/checkout@v3
