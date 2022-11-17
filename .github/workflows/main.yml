@@ -7,6 +7,7 @@ on:
 
 jobs:
   update-version-name:
+    if: github.event.pull_request.merged == false
     runs-on: ubuntu-latest
     steps:
       - run: echo "event name is:" ${{ github.event_name }}
