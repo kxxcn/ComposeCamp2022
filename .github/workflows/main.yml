@@ -1,11 +1,9 @@
 name: Update Version Name
-run-name: Run "$BRANCH" script for version configurations by ${{ github.actor }}👮‍♂️
+run-name: Run ${{ github.ref_name }} script for version configurations by ${{ github.actor }}👮‍♂️
 on:
   push:
     branches:
       - 'release/**'
-env:
-  BRANCH: '${{ github.event.ref_name }}'
 
 jobs:
   update-version-name:
