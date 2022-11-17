@@ -16,10 +16,12 @@ jobs:
         with:
           value: ${{ github.ref_name }}
           index_of_str: "release/"
+          run: echo ${{ github.ref_name }}
 
       - name: Update gradle version
         uses: chkfung/android-version-actions@v1.1
         with:
+          run: echo ${{ steps.version.outputs.substring }}
           gradlePath: pathway1/BasicsCodelab/app/build.gradle
           versionName: ${{ steps.version.outputs.substring }}
           
