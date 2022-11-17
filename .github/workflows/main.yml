@@ -16,23 +16,25 @@ jobs:
         with:
           value: ${{ github.ref_name }}
           index_of_str: "release/"
-          run: echo ${{ github.ref_name }}
-
-      - name: Update gradle version
-        uses: chkfung/android-version-actions@v1.1
-        with:
-          run: echo ${{ steps.version.outputs.substring }}
-          gradlePath: pathway1/BasicsCodelab/app/build.gradle
-          versionName: ${{ steps.version.outputs.substring }}
           
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.TOKEN }}
-          commit-message: ${{ steps.version.outputs.substring }} 버전 변경
-          branch: gradle/${{ steps.version.outputs.substring }}
-          delete-branch: true
-          title: ${{ steps.version.outputs.substring }} 버전 변경
-          labels: |
-            release
-            github-actions
+      - name: Check gradle version
+        run: echo ${{ steps.version.outputs.substring }}
+
+#       - name: Update gradle version
+#         uses: chkfung/android-version-actions@v1.1
+#         with:
+#           run: echo ${{ steps.version.outputs.substring }}
+#           gradlePath: pathway1/BasicsCodelab/app/build.gradle
+#           versionName: ${{ steps.version.outputs.substring }}
+          
+#       - name: Create pull request
+#         uses: peter-evans/create-pull-request@v4
+#         with:
+#           token: ${{ secrets.TOKEN }}
+#           commit-message: ${{ steps.version.outputs.substring }} 버전 변경
+#           branch: gradle/${{ steps.version.outputs.substring }}
+#           delete-branch: true
+#           title: ${{ steps.version.outputs.substring }} 버전 변경
+#           labels: |
+#             release
+#             github-actions
