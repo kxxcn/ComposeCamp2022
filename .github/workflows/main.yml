@@ -1,5 +1,5 @@
 name: Update Version Name
-run-name: Run ${{ steps.branch.outputs.ref }} script for version configurations by ${{ github.actor }}👮‍♂️
+run-name: Run ${{ github.event.ref_name }} script for version configurations by ${{ github.actor }}👮‍♂️
 on:
   push:
     branches:
@@ -19,19 +19,12 @@ jobs:
 #       - run: echo ${{ github.action }}
 #       - run: echo "github.event.action:"${{ github.event.action }}
 #       - run: echo "github.event.pull_request.merged:" ${{ github.event.pull_request.merged }}
-    
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Get branch name
-        id: branch
-        run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
         
 #       - name: Extract gradle version
 #         uses: bhowell2/github-substring-action@v1.0.0
 #         id: version
 #         with:
-#           value: ${{ steps.branch.outputs.ref }}
+#           value: ${{ github.event.ref_name }}
 #           index_of_str: "release/"
 
 #       - name: Update gradle version
