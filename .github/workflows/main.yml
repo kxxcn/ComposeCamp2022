@@ -1,37 +1,33 @@
 name: Update Version Name
-run-name: Run "${{ github.ref_name }}" by ${{ github.actor }}👮‍♂️
+run-name: Run script for version configurations by ${{ github.actor }}👮‍♂️
 on:
   push:
     branches:
       - 'release/**'
 
 jobs:
-  update-version-name:
-    if: github.event.created == true
+  build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get branch name
+        id: branch
+        run: echo ::set-output name=ref::${GITHUB_REF#refs/*/}
+        
       - name: Extract gradle version
         uses: bhowell2/github-substring-action@v1.0.0
         id: version
         with:
-          value: ${{ github.ref_name }}
+          value: ${{ steps.branch.outputs.ref }}
           index_of_str: "release/"
-          
-      - name: Check gradle version
-        run: echo ${{ steps.version.outputs.substring }}
-        
+
       - name: Update gradle version
         uses: chkfung/android-version-actions@v1.1
         with:
           gradlePath: pathway1/BasicsCodelab/app/build.gradle
           versionName: ${{ steps.version.outputs.substring }}
-
-#       - name: Update gradle version
-#         uses: chkfung/android-version-actions@v1.1
-#         with:
-#           run: echo ${{ steps.version.outputs.substring }}
-#           gradlePath: pathway1/BasicsCodelab/app/build.gradle
-#           versionName: ${{ steps.version.outputs.substring }}
           
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
@@ -41,6 +37,3 @@ jobs:
           branch: gradle/${{ steps.version.outputs.substring }}
           delete-branch: true
           title: ${{ steps.version.outputs.substring }} 버전 변경
-          labels: |
-            release
-            github-actions
