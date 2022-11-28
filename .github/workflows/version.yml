@@ -26,7 +26,7 @@ jobs:
       - name: Overwrite version name
         uses: chkfung/android-version-actions@v1.1
         with:
-          gradlePath: pathway1/BasicsCodelab/build.gradle
+          gradlePath: pathway1/BasicsCodelab/app/build.gradle
           versionName: ${{ steps.version.outputs.substring }}
           
       - name: Create pull request
