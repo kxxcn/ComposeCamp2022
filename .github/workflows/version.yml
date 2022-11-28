@@ -1,0 +1,42 @@
+name: Update Version Name
+run-name: Run "${{ github.ref_name }}" by ${{ github.actor }}👮‍♂️
+on:
+  push:
+    branches:
+      - 'release/**'
+
+jobs:
+  update-version-name:
+    if: github.event.created == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Extract version name
+        uses: bhowell2/github-substring-action@v1.0.0
+        id: version
+        with:
+          value: ${{ github.ref_name }}
+          index_of_str: "release/"
+          
+      - name: Check version name
+        run: echo ${{ steps.version.outputs.substring }}
+
+      - name: Overwrite version name
+        uses: chkfung/android-version-actions@v1.1
+        with:
+          gradlePath: app/build.gradle
+          versionName: ${{ steps.version.outputs.substring }}
+          
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: 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
+          commit-message: ${{ steps.version.outputs.substring }} 버전 변경
+          branch: version/${{ steps.version.outputs.substring }}
+          delete-branch: true
+          title: ${{ steps.version.outputs.substring }} 버전 변경
+          labels: |
+            release
+            Automation
