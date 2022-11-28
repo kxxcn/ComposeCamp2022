@@ -32,9 +32,9 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          token: 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
+          token: "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"
           commit-message: ${{ steps.version.outputs.substring }} 버전 변경
-          branch: version/${{ steps.version.outputs.substring }}
+          branch: gradle/${{ steps.version.outputs.substring }}
           delete-branch: true
           title: ${{ steps.version.outputs.substring }} 버전 변경
           labels: |
